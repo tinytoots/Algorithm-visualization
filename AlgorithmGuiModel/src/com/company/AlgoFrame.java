@@ -87,9 +87,7 @@ public class AlgoFrame extends JFrame {
         }
 
 
-
-
-
+        
         @Override
         public Dimension getPreferredSize(){   //返回画布的大小
             return new Dimension(canvasWidth,canvasHeight);
