@@ -1,14 +1,12 @@
 //为了方便绘制，写了这个类，包含若干方法
-package com.company;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.*;
-import javax.swing.*;
 import java.awt.geom.GeneralPath;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.lang.InterruptedException;
+
 
 public class AlgoVisHelper {
 
@@ -37,27 +35,17 @@ public class AlgoVisHelper {
     public static final Color White = new Color(0xFFFFFF);
 
 
-
-    public static void setStrokeWidth(Graphics2D g, int w){  //左边将绘图的上下文环境传给函数, w粗细
-        int strokeWidth = w; //笔画宽度
-        g.setStroke(new BasicStroke(strokeWidth, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)); //CAP绘制的端点都是圆形，JOIN拐歪时的拐点是平滑的圆形
-    }
-
-    public static void setColor(Graphics2D g, Color color){
-
-        g.setColor(color);
-    }
-
     //加入第二个工具函数,绘制一个空心圆
-    public  static void strokeCircle(Graphics2D g, int x, int y, int r){
+    public static void strokeCircle(Graphics2D g, int x, int y, int r){
 
         Ellipse2D circle = new Ellipse2D.Double(x-r, y-r, 2*r, 2*r);
         g.draw(circle);
     }
-    //创建一个实心圆
-    public  static void fillCircle(Graphics2D g, int x, int y, int r) {
 
-        Ellipse2D circle = new Ellipse2D.Double(x - r, y - r, 2 * r, 2 * r);
+    //创建一个实心圆
+    public static void fillCircle(Graphics2D g, int x, int y, int r){
+
+        Ellipse2D circle = new Ellipse2D.Double(x-r, y-r, 2*r, 2*r);
         g.fill(circle);
     }
 
@@ -68,13 +56,31 @@ public class AlgoVisHelper {
         g.draw(rectangle);
     }
 
+    //putImage函数，作用是将放在工程中的图形读取出来，放到窗口上
     public static void fillRectangle(Graphics2D g, int x, int y, int w, int h){
 
         Rectangle2D rectangle = new Rectangle2D.Double(x, y, w, h);
         g.fill(rectangle);
     }
 
-    //putImage函数，作用是将放在工程中的图形读取出来，放到窗口上
+    public static void setColor(Graphics2D g, Color color){
+        g.setColor(color);
+    }
+
+    public static void setStrokeWidth(Graphics2D g, int w){ //左边将绘图的上下文环境传给函数, w粗细
+        int strokeWidth = w; //笔画宽度
+        g.setStroke(new BasicStroke(strokeWidth, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)); //CAP绘制的端点都是圆形，JOIN拐歪时的拐点是平滑的圆形
+    }
+
+    public static void pause(int t) { //辅助函数，对异常进行处理
+        try {
+            Thread.sleep(t);
+        }
+        catch (InterruptedException e) { //Thread.sleep 有可能抛出的异常类型是InterruptedException
+            System.out.println("Error sleeping");
+        }
+    }
+
     public static void putImage(Graphics2D g, int x, int y, String imageURL){
 
         ImageIcon icon = new ImageIcon(imageURL);
@@ -82,7 +88,6 @@ public class AlgoVisHelper {
 
         g.drawImage(image, x, y, null);
     }
-
 
     //drawText函数，以cneterx，centery坐标为中心的位置绘制一个字符串
     public static void drawText(Graphics2D g, String text, int centerx, int centery){
@@ -96,14 +101,4 @@ public class AlgoVisHelper {
         g.drawString(text, centerx - w/2, centery + h);
     }
 
-
-    public  static void pause(int t){  //辅助函数，对异常进行处理
-
-        try {
-            Thread.sleep(t);
-        }
-        catch (InterruptedException e){ //Thread.sleep 有可能抛出的异常类型是InterruptedException
-            System.out.println("Error sleeping.");
-        }
-    }
 }
