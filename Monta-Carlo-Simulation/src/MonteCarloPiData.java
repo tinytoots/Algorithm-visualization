@@ -1,13 +1,13 @@
 import java.awt.*;
 import java.util.LinkedList;
 
-public class MonteCarloPiDate { //这个类包含数据层中的所有内容
+public class MonteCarloPiData { //这个类包含数据层中的所有内容
 
     private Circle circle; //数据
     private int insideCircle = 0; //在圆中点的数量，初始化为0
     private LinkedList<Point> points;
 
-    public MonteCarloPiDate(Circle circle){
+    public MonteCarloPiData(Circle circle){
         this.circle = circle;
         points = new LinkedList<Point>();
     }

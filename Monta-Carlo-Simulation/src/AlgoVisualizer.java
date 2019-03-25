@@ -1,13 +1,11 @@
 import java.awt.*;
-import java.util.LinkedList;
-import javax.swing.*;
 
 public class AlgoVisualizer {
 
     //TODO: 创建自己的数据
     private static int DELAY = 40;
 
-    private MonteCarloPiDate data;
+    private MonteCarloPiData data;
     private AlgoFrame frame; //视图
     private int N;
 
@@ -24,7 +22,7 @@ public class AlgoVisualizer {
         this.N = N;
 
         Circle circle = new Circle(sceneWidth/2, sceneHeight/2, sceneWidth/2);
-        data = new MonteCarloPiDate(circle);
+        data = new MonteCarloPiData(circle);
 
         // 初始化视图
         EventQueue.invokeLater(() -> {

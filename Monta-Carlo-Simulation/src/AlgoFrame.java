@@ -1,6 +1,5 @@
 //MVC结果，视图层
 import java.awt.*;
-import java.util.LinkedList;
 import javax.swing.*;
 
 public class AlgoFrame extends JFrame{
@@ -38,8 +37,8 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    private MonteCarloPiDate data;
-    public void render(MonteCarloPiDate data){ //设立一个render函数，收到从控制层AlgoVisualizer传进来的一个data数组
+    private MonteCarloPiData data;
+    public void render(MonteCarloPiData data){ //设立一个render函数，收到从控制层AlgoVisualizer传进来的一个data数组
         this.data = data;
         repaint(); //调用repaint函数，自带函数，讲JFrame所有控件重新刷新一遍，会自动调用JPanel的子类AlgoCanvas（我们的画布）相应的paintComponent方法
     }
