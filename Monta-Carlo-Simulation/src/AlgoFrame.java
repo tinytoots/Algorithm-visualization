@@ -38,11 +38,9 @@ public class AlgoFrame extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     // data
-    private Circle circle;
-    private LinkedList<Point> points;
-    public void render(Circle circle, LinkedList<Point> points){ //设立一个render函数，收到从控制层AlgoVisualizer传进来的一个data数组
-        this.circle = circle;
-        this.points = points;
+    private MonteCarloPiDate data;
+    public void render(MonteCarloPiDate data){ //设立一个render函数，收到从控制层AlgoVisualizer传进来的一个data数组
+        this.data = data;
         repaint(); //调用repaint函数，自带函数，讲JFrame所有控件重新刷新一遍，会自动调用JPanel的子类AlgoCanvas（我们的画布）相应的paintComponent方法
     }
 
@@ -68,12 +66,13 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
+            Circle circle = data.getCircle();
             AlgoVisHelper.setStrokeWidth(g2d, 3); //绘制圆，设置线条宽度为3
             AlgoVisHelper.setColor(g2d, AlgoVisHelper.Blue);
             AlgoVisHelper.strokeCircle(g2d, circle.getX(), circle.getY(), circle.getR()); //绘制一个空心圆
 
-            for(int i = 0 ; i < points.size() ; i ++){ //绘制所有的点
-                Point p = points.get(i); //每次取出链表中一个point
+            for(int i = 0 ; i < data.getPointNumber() ; i ++){ //绘制所有的点
+                Point p = data.getPoint(i); //每次取出链表中一个point
                 if(circle.contain(p))
                     AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
                 else

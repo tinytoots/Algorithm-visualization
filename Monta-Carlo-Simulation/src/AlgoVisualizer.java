@@ -7,8 +7,7 @@ public class AlgoVisualizer {
     //TODO: 创建自己的数据
     private static int DELAY = 40;
 
-    private Circle circle; //数据
-    private LinkedList<Point> points;
+    private MonteCarloPiDate data;
     private AlgoFrame frame; //视图
     private int N;
 
@@ -24,8 +23,8 @@ public class AlgoVisualizer {
         //初始化数据
         this.N = N;
 
-        circle = new Circle(sceneWidth/2, sceneHeight/2, sceneWidth/2);
-        points = new LinkedList<Point>();
+        Circle circle = new Circle(sceneWidth/2, sceneHeight/2, sceneWidth/2);
+        data = new MonteCarloPiDate(circle);
 
         // 初始化视图
         EventQueue.invokeLater(() -> {
@@ -41,28 +40,26 @@ public class AlgoVisualizer {
     //封装动画逻辑
     public void run(){
 
-        for(int i = 0 ; i < N ; i ++){
+        for(int i = 0 ; i < N ; i ++){ //循环每进行100次进行一次输出
 
-            frame.render(circle, points); //根据圆圈circle以及points里存在的点进行绘制
-            AlgoVisHelper.pause(DELAY); //停顿delay毫秒
-
-            //模拟向屏幕中打点
+            if(i % 100 == 0) {
+                frame.render(data); //根据圆圈circle以及points里存在的点进行绘制
+                AlgoVisHelper.pause(DELAY); //停顿delay毫秒
+                System.out.println(data.estimatePi());
+            }
 
             //首先随机一个x和一个y值，横坐标是0到窗口的宽度，纵坐标是0到窗口的高度
             int x = (int)(Math.random() * frame.getCanvasWidth());
             int y = (int)(Math.random() * frame.getCanvasHeight());
-
-            Point p = new Point(x, y);
-            points.add(p); //把新创建的p值放入points列表
+            data.addPoint(new Point(x, y));
         }
-
     }
 
     public static void main(String[] args) { //指定窗口大小
 
         int sceneWidth = 800;
         int sceneHeight = 800;
-        int N = 10000;
+        int N = 50000;
 
         AlgoVisualizer vis = new AlgoVisualizer(sceneWidth, sceneHeight, N);
     }
